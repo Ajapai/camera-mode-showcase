@@ -32,7 +32,4 @@ public:
 	// Member Variables
 public:
 	FRotator TargetRotation;
-
-protected:
-	bool bShouldTick = false;
 };

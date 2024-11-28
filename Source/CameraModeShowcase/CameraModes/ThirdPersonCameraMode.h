@@ -26,4 +26,7 @@ public:
 	// Member Variables
 protected:
 	float TargetArmLength = 400;
+
+private:
+	bool bShouldInterpolateRotation;
 };

@@ -116,19 +116,48 @@ void ACameraModeShowcaseCharacter::SetupPlayerInputComponent(UInputComponent* Pl
 	}
 }
 
-void ACameraModeShowcaseCharacter::EnterSideScrollerMode(const float& YawRotation) const
+void ACameraModeShowcaseCharacter::EnterSideScrollerMode(const float& YawRotation)
 {
+	bCurrentlyInSideScrollerCollider = true;
+	CurrentSideScrollerYaw = YawRotation;
+	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, "Enter Side Scroller", true, {1, 1});
 	SideScrollerCameraMode->EnterMode(YawRotation);
 }
 
-void ACameraModeShowcaseCharacter::EnterThirdPersonMode() const
+void ACameraModeShowcaseCharacter::LeaveSideScrollerMode()
 {
-	ThirdPersonCameraMode->EnterMode();
+	bCurrentlyInSideScrollerCollider = false;
+	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, "Leave Side Scroller", true, {1, 1});
+	if (bCurrentlyInTopDownCollider)
+	{
+		TopDownCameraMode->EnterMode(CurrentTopDownYaw);
+	}
+	else
+	{
+		ThirdPersonCameraMode->EnterMode();
+	}
 }
 
-void ACameraModeShowcaseCharacter::EnterTopDownMode(const float& YawRotation) const
+void ACameraModeShowcaseCharacter::EnterTopDownMode(const float& YawRotation)
 {
+	bCurrentlyInTopDownCollider = true;
+	CurrentTopDownYaw = YawRotation;
+	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, "Enter Top Down", true, {1, 1});
 	TopDownCameraMode->EnterMode(YawRotation);
+}
+
+void ACameraModeShowcaseCharacter::LeaveTopDownMode()
+{
+	bCurrentlyInTopDownCollider = false;
+	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Green, "Leave Top Town", true, {1, 1});
+	if (bCurrentlyInSideScrollerCollider)
+	{
+		SideScrollerCameraMode->EnterMode(CurrentSideScrollerYaw);
+	}
+	else
+	{
+		ThirdPersonCameraMode->EnterMode();
+	}
 }
 
 // ReSharper disable once CppMemberFunctionMayBeConst

@@ -67,9 +67,10 @@ public:
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
-	void EnterSideScrollerMode(const float& YawRotation) const;
-	void EnterThirdPersonMode() const;
-	void EnterTopDownMode(const float& YawRotation) const;
+	void EnterSideScrollerMode(const float& YawRotation);
+	void LeaveSideScrollerMode();
+	void EnterTopDownMode(const float& YawRotation);
+	void LeaveTopDownMode();
 	
 protected:
 	void Move(const FInputActionValue& Value);
@@ -82,6 +83,14 @@ private:
 	TStrongObjectPtr<USideScrollerCameraMode> SideScrollerCameraMode;
 	TStrongObjectPtr<UThirdPersonCameraMode> ThirdPersonCameraMode;
 	TStrongObjectPtr<UTopDownCameraMode> TopDownCameraMode;
+
+
+	// Member Variables
+private:
+	bool bCurrentlyInSideScrollerCollider = false;
+	bool bCurrentlyInTopDownCollider = false;
+	float CurrentSideScrollerYaw = 0;
+	float CurrentTopDownYaw = 0;
 
 
 	// Friend Classes

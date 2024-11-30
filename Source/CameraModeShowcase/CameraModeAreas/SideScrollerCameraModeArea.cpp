@@ -10,7 +10,7 @@ void ASideScrollerCameraModeArea::OnComponentBeginOverlap(UPrimitiveComponent* O
 {
 	if (OtherActor->IsA(ACameraModeShowcaseCharacter::StaticClass()))
 	{
-		auto Character = Cast<ACameraModeShowcaseCharacter>(OtherActor);
+		const auto Character = Cast<ACameraModeShowcaseCharacter>(OtherActor);
 		Character->EnterSideScrollerMode(ArrowComponent->GetComponentRotation().Yaw);
 	}
 }
@@ -20,7 +20,7 @@ void ASideScrollerCameraModeArea::OnComponentEndOverlap(UPrimitiveComponent* Ove
 {
 	if (OtherActor->IsA(ACameraModeShowcaseCharacter::StaticClass()))
 	{
-		auto Character = Cast<ACameraModeShowcaseCharacter>(OtherActor);
-		Character->EnterThirdPersonMode();
+		const auto Character = Cast<ACameraModeShowcaseCharacter>(OtherActor);
+		Character->LeaveSideScrollerMode();
 	}
 }

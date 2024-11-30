@@ -10,7 +10,7 @@ void ATopDownCameraModeArea::OnComponentBeginOverlap(UPrimitiveComponent* Overla
 {
 	if (OtherActor->IsA(ACameraModeShowcaseCharacter::StaticClass()))
 	{
-		auto Character = Cast<ACameraModeShowcaseCharacter>(OtherActor);
+		const auto Character = Cast<ACameraModeShowcaseCharacter>(OtherActor);
 		Character->EnterTopDownMode(ArrowComponent->GetComponentRotation().Yaw);
 	}
 }
@@ -20,7 +20,7 @@ void ATopDownCameraModeArea::OnComponentEndOverlap(UPrimitiveComponent* Overlapp
 {
 	if (OtherActor->IsA(ACameraModeShowcaseCharacter::StaticClass()))
 	{
-		auto Character = Cast<ACameraModeShowcaseCharacter>(OtherActor);
-		Character->EnterThirdPersonMode();
+		const auto Character = Cast<ACameraModeShowcaseCharacter>(OtherActor);
+		Character->LeaveTopDownMode();
 	}
 }

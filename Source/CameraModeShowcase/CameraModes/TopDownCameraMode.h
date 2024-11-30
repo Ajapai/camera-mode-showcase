@@ -25,5 +25,5 @@ public:
 
 	// Member Fields
 private:
-	float TargetArmLength = 800;
+	float TargetArmLength = 600;
 };

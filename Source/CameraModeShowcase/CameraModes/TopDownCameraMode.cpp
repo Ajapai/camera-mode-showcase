@@ -40,4 +40,5 @@ void UTopDownCameraMode::EnterMode(const float& YawRotation)
 {
 	Owner->CurrentCameraMode = Owner->TopDownCameraMode.Get();
 	TargetRotation = FRotator(270, YawRotation, 0);
+	Owner->CameraBoom->bDoCollisionTest = false;
 }

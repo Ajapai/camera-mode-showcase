@@ -36,4 +36,5 @@ void USideScrollerCameraMode::EnterMode(const float& YawRotation)
 {
 	Owner->CurrentCameraMode = Owner->SideScrollerCameraMode.Get();
 	TargetRotation = FRotator(0, YawRotation, 0);
+	Owner->CameraBoom->bDoCollisionTest = false;
 }

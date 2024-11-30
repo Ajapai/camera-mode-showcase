@@ -61,4 +61,6 @@ void UThirdPersonCameraMode::EnterMode(const float& YawRotation)
 	Owner->CurrentCameraMode = Owner->ThirdPersonCameraMode.Get();
 
 	bShouldInterpolateRotation = true;
+
+	Owner->CameraBoom->bDoCollisionTest = true;
 }
